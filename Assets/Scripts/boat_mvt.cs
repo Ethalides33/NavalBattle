@@ -72,9 +72,11 @@ public class BoatMovement : MonoBehaviour
         // Instantiate the sphere at the shoot point's position and rotation
         GameObject sphere = Instantiate(spherePrefab, shootPoint.position, shootPoint.rotation);
         Rigidbody sphereRb = sphere.GetComponent<Rigidbody>();
-
-        Vector3 dir = new(-shootPoint.forward.x,0.75f,-shootPoint.forward.z);        // Apply force to the sphere in the shoot point's forward direction
-        sphereRb.AddForce(dir*shootingForce);
+        Vector3 shootingDirection = Quaternion.Euler(-20, -90, 0) * cannon.transform.forward;
+        shootingDirection = new(shootingDirection.x,0.5f,shootingDirection.z);
+        Debug.Log(shootingDirection);
+        // Vector3 dir = new(-shootPoint.forward.x,0.75f,-shootPoint.forward.z);        // Apply force to the sphere in the shoot point's forward direction
+        sphereRb.AddForce(shootingDirection*shootingForce);
     }
 
 }
